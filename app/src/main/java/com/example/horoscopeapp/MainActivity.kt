@@ -3,25 +3,25 @@ package com.example.horoscopeapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
     val horoscopeList: List<Horoscope> = listOf(
-        Horoscope("aries", "Aries", 0),
-        Horoscope("aries", "Taurus", 0),
-        Horoscope("aries", "Gemini", 0),
-        Horoscope("aries", "Cancer", 0),
-        Horoscope("aries", "Leo", 0),
-        Horoscope("aries", "Virgo", 0),
-        Horoscope("aries", "Libra", 0),
-        Horoscope("aries", "Scorpio", 0),
-        Horoscope("aries", "Sagittarius", 0),
-        Horoscope("aries", "Capricorn", 0),
-        Horoscope("aries", "Aquarius", 0),
-        Horoscope("aries", "Pisces", 0)
-
+        Horoscope("aries", R.string.horoscope_name_aries, R.string.horoscope_date_aries, R.drawable.aries_icon),
+        Horoscope("aries", R.string.horoscope_name_taurus, R.string.horoscope_date_taurus, R.drawable.taurus_icon),
+        Horoscope("aries", R.string.horoscope_name_gemini, R.string.horoscope_date_gemini, R.drawable.gemini_icon),
+        Horoscope("aries", R.string.horoscope_name_cancer, R.string.horoscope_date_cancer, R.drawable.cancer_icon),
+        Horoscope("aries", R.string.horoscope_name_leo, R.string.horoscope_date_leo, R.drawable.leo_icon),
+        Horoscope("aries", R.string.horoscope_name_virgo, R.string.horoscope_date_virgo, R.drawable.virgo_icon),
+        Horoscope("aries", R.string.horoscope_name_libra, R.string.horoscope_date_libra, R.drawable.libra_icon),
+        Horoscope("aries", R.string.horoscope_name_scorpio, R.string.horoscope_date_scorpio, R.drawable.scorpio_icon),
+        Horoscope("aries", R.string.horoscope_name_sagittarius, R.string.horoscope_date_sagittarius, R.drawable.sagittarius_icon),
+        Horoscope("aries", R.string.horoscope_name_capricorn, R.string.horoscope_date_capricorn, R.drawable.capricorn_icon),
+        Horoscope("aries", R.string.horoscope_name_aquarius, R.string.horoscope_date_aquarius, R.drawable.aquarius_icon),
+        Horoscope("aries", R.string.horoscope_name_pisces, R.string.horoscope_date_pisces, R.drawable.pisces_icon)
     )
 
     lateinit var recyclerView: RecyclerView
@@ -35,5 +35,6 @@ class MainActivity : AppCompatActivity() {
         val adapter = HoroscopeAdapter(horoscopeList)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+        //recyclerView.layoutManager = GridLayoutManager(this, 2)
     }
 }

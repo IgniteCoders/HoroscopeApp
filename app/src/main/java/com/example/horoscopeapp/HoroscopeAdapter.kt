@@ -3,6 +3,7 @@ package com.example.horoscopeapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -28,17 +29,26 @@ class HoroscopeAdapter(private val dataSet: List<Horoscope>) :
     // y lo utilizaremos para mostrar los datos de esa celda
     override fun onBindViewHolder(holder: HoroscopeViewHolder, position: Int) {
         val horoscope = dataSet[position]
-        holder.textView.text = horoscope.name
-
+        holder.render(horoscope)
     }
 
 }
 
 // Esta clase se encarga de guardarnos la vista y no tener que inflarla de nuevo
 class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val textView: TextView
+    val nameTextView: TextView
+    val descTextView: TextView
+    val logoImageView: ImageView
 
     init {
-        textView = view.findViewById(R.id.nameTextView)
+        nameTextView = view.findViewById(R.id.nameTextView)
+        descTextView = view.findViewById(R.id.descTextView)
+        logoImageView = view.findViewById(R.id.logoImageView)
+    }
+
+    fun render(horoscope: Horoscope) {
+        nameTextView.setText(horoscope.name)
+        descTextView.setText(horoscope.description)
+        logoImageView.setImageResource(horoscope.logo)
     }
 }
