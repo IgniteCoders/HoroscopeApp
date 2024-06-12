@@ -1,5 +1,6 @@
 package com.example.horoscopeapp
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class HoroscopeAdapter(private val dataSet: List<Horoscope>) :
+class HoroscopeAdapter(private val dataSet: List<Horoscope>, private val onItemClickListener: (Int) -> Unit) :
     RecyclerView.Adapter<HoroscopeViewHolder>() {
 
     // Este método se llama para crear nuevas celdas,
@@ -30,6 +31,9 @@ class HoroscopeAdapter(private val dataSet: List<Horoscope>) :
     override fun onBindViewHolder(holder: HoroscopeViewHolder, position: Int) {
         val horoscope = dataSet[position]
         holder.render(horoscope)
+        holder.itemView.setOnClickListener {
+            onItemClickListener(position)
+        }
     }
 
 }
