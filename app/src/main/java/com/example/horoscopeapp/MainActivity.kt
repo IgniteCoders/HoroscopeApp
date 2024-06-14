@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
 
+    lateinit var adapter: HoroscopeAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
 
-        val adapter = HoroscopeAdapter(horoscopeList) { position ->
+        adapter = HoroscopeAdapter(horoscopeList) { position ->
             navigateToDetail(horoscopeList[position])
         }
         recyclerView.adapter = adapter
@@ -45,22 +47,15 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                horoscopeList = HoroscopeProvider.findAll()
+                if (newText != null) {
+                    horoscopeList = HoroscopeProvider.findAll().filter { getString(it.name).contains(newText, true) }
+                    adapter.updateData(horoscopeList)
+                }
                 return true
             }
         })
 
         return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_search -> {
-                Log.i("MENU", "He hecho click en el menu de busqueda")
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     fun navigateToDetail(horoscope: Horoscope) {
