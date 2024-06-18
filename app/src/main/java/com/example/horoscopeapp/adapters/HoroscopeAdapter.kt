@@ -1,8 +1,5 @@
 package com.example.horoscopeapp.adapters
 
-import android.graphics.Color
-import android.text.SpannableString
-import android.text.style.BackgroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscopeapp.R
 import com.example.horoscopeapp.data.Horoscope
+import com.example.horoscopeapp.utils.SessionManager
 import com.example.horoscopeapp.utils.highlight
 
 
@@ -65,17 +63,27 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val nameTextView: TextView
     private val descTextView: TextView
     private val logoImageView: ImageView
+    private val favoriteImageView: ImageView
 
     init {
         nameTextView = view.findViewById(R.id.nameTextView)
         descTextView = view.findViewById(R.id.descTextView)
         logoImageView = view.findViewById(R.id.logoImageView)
+        favoriteImageView = view.findViewById(R.id.favoriteImageView)
     }
 
     fun render(horoscope: Horoscope) {
         nameTextView.setText(horoscope.name)
         descTextView.setText(horoscope.description)
         logoImageView.setImageResource(horoscope.logo)
+
+        val context = itemView.context
+        var isFavorite = SessionManager(context).isFavorite(horoscope.id)
+        if (isFavorite) {
+            favoriteImageView.visibility = View.VISIBLE
+        } else {
+            favoriteImageView.visibility = View.GONE
+        }
     }
 
     // Subraya el texto que coincide con la busqueda

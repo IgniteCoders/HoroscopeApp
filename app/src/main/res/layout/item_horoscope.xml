@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="?android:attr/selectableItemBackground">
 
-    <ImageView
-        android:id="@+id/logoImageView"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/aries_icon"/>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/aries_icon"/>
+
+        <ImageView
+            android:id="@+id/favoriteImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_favorite_selected"
+            app:tint="@color/favorite"
+            android:scaleType="centerCrop"
+            android:layout_gravity="bottom|end"/>
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

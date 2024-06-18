@@ -15,6 +15,10 @@ class SessionManager(context: Context) {
         sharedPref = context.getSharedPreferences("horoscope_session", Context.MODE_PRIVATE)
     }
 
+    fun isFavorite(horoscopeId: String) : Boolean {
+        return getFavoriteHoroscope()?.equals(horoscopeId) ?: false
+    }
+
     fun setFavoriteHoroscope(id: String) {
         val editor = sharedPref.edit()
         editor.putString(FAVORITE_HOROSCOPE, id)

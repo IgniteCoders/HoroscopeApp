@@ -39,7 +39,7 @@ class DetailActivity : AppCompatActivity() {
 
         horoscope = HoroscopeProvider.findById(id)!!
 
-        isFavorite = session.getFavoriteHoroscope()?.equals(horoscope.id) ?: false
+        isFavorite = session.isFavorite(horoscope.id)
 
         textView = findViewById(R.id.textView)
         imageView = findViewById(R.id.imageView)

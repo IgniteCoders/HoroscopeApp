@@ -12,14 +12,16 @@
         android:id="@+id/imageView"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginVertical="8dp"
         tools:src="@drawable/aries_icon"/>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hola"
-        android:textSize="30sp"
+        android:text="@string/horoscope_of_day"
+        android:textSize="24sp"
+        android:textStyle="bold"
         android:textAlignment="center"/>
 
 </LinearLayout>
