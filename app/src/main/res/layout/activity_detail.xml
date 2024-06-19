@@ -24,4 +24,13 @@
         android:textStyle="bold"
         android:textAlignment="center"/>
 
+    <TextView
+        android:id="@+id/dailyHoroscopeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="18sp"
+        android:justificationMode="inter_word"
+        android:padding="16dp"
+        android:lineHeight="28sp"/>
+
 </LinearLayout>
