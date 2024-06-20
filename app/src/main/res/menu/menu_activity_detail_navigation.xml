@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_daily"
+        android:icon="@android:drawable/ic_menu_today"
+        app:showAsAction="always"
+        android:title="@string/menu_daily"/>
+    <item
+        android:id="@+id/menu_weekly"
+        android:icon="@android:drawable/ic_menu_week"
+        app:showAsAction="always"
+        android:title="@string/menu_weekly"/>
+    <item
+        android:id="@+id/menu_monthly"
+        android:icon="@android:drawable/ic_menu_month"
+        app:showAsAction="always"
+        android:title="@string/menu_monthly"/>
+</menu>

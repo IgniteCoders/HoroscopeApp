@@ -19,18 +19,37 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/horoscope_of_day"
+        android:text="@string/horoscope_name_aries"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textAlignment="center"/>
 
-    <TextView
-        android:id="@+id/dailyHoroscopeTextView"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="18sp"
-        android:justificationMode="inter_word"
-        android:padding="16dp"
-        android:lineHeight="28sp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:menu="@menu/menu_activity_detail_navigation"/>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/dailyHoroscopeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:justificationMode="inter_word"
+            android:padding="16dp"
+            android:lineHeight="28sp"/>
+
+    </ScrollView>
 
 </LinearLayout>

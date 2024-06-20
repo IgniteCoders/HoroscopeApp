@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,8 @@ import com.example.horoscopeapp.R
 import com.example.horoscopeapp.data.Horoscope
 import com.example.horoscopeapp.data.HoroscopeProvider
 import com.example.horoscopeapp.utils.SessionManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,6 +36,8 @@ class DetailActivity : AppCompatActivity() {
 
     lateinit var imageView: ImageView
     lateinit var textView: TextView
+    lateinit var navigationBar: BottomNavigationView
+    lateinit var progressIndicator: LinearProgressIndicator
     lateinit var dailyHoroscopeTextView: TextView
 
     lateinit var favoriteMenuItem: MenuItem
@@ -53,6 +58,8 @@ class DetailActivity : AppCompatActivity() {
 
         textView = findViewById(R.id.textView)
         imageView = findViewById(R.id.imageView)
+        navigationBar = findViewById(R.id.navigationBar)
+        progressIndicator = findViewById(R.id.progressIndicator)
         dailyHoroscopeTextView = findViewById(R.id.dailyHoroscopeTextView)
 
         textView.setText(horoscope.name)
@@ -62,7 +69,23 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setSubtitle(horoscope.description)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        getDailyHoroscope()
+        navigationBar.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu_daily -> {
+                    getHoroscopeLuck("daily")
+                }
+                R.id.menu_weekly -> {
+                    getHoroscopeLuck("weekly")
+                }
+                R.id.menu_monthly -> {
+                    getHoroscopeLuck("monthly")
+                }
+            }
+
+            return@setOnItemSelectedListener true
+        }
+
+        navigationBar.selectedItemId = R.id.menu_daily
     }
 
     fun setFavoriteIcon () {
@@ -110,12 +133,13 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    fun getDailyHoroscope() {
+    fun getHoroscopeLuck(method: String) {
+        progressIndicator.visibility = View.VISIBLE
         // Llamada en hilo secundario
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Declaramos la url
-                val url = URL("https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign=${horoscope.id}&day=TODAY")
+                val url = URL("https://horoscope-app-api.vercel.app/api/v1/get-horoscope/$method?sign=${horoscope.id}&day=TODAY")
                 val con = url.openConnection() as HttpsURLConnection
                 con.requestMethod = "GET"
                 val responseCode = con.responseCode
@@ -142,6 +166,7 @@ class DetailActivity : AppCompatActivity() {
                     }*/
                     runOnUiThread {
                         dailyHoroscopeTextView.text = result
+                        progressIndicator.visibility = View.GONE
                     }
 
                 } else { // Hubo un error
